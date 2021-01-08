@@ -1,0 +1,23 @@
+.logo-main-site{
+    height: 9vh;
+}
+
+.btnPrimary{
+    background-color: #33473a;
+    color: #f1e9d2;
+}
+
+.btnPrimary:hover{
+    background-color: #d8af57;
+    color: #33473a;
+}
+
+.navbar-light{
+    color: #33473a !important;
+}
+
+.product-items h5{
+    text-transform: uppercase;
+    font-max-size: 15px;
+    margin-bottom: 1px;
+}
