@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Panier{% endblock %}
+
+{% block titre %}Mon panier{% endblock %}
+{% block body %}
+    {% if cartComplete|length > 0 %}
+        <p class="text-center">Voici le récapitulatif de votre panier</p>
+        <div class="d-flex justify-content-between align-items-center m-3">
+            <a href="{{path('product')}}" class="btn btnPrimary">
+                <i class="fas fa-arrow-left"></i> Continuer mes achats</a>
+            <a href="{{path('remove_my_cart')}}" class="btn btn-outline-danger">
+                <i class="fas fa-dumpster"></i>
+                Vider totalement le panier</a>
+        </div>
+        <table class="table py-3 text-center">
+            <thead>
+            <tr>
+                <th scope="col">Produit</th>
+                <th scope="col"></th>
+                <th scope="col">Q.té</th>
+                <th scope="col">Prix</th>
+                <th scope="col">Total</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% set total = null %}
+            {% for cart in cartComplete %}
+                <tr>
+                    <th scope="row">
+                        <img src="uploads/{{ cart.product.image}}" height="50px">
+                    </th>
+                    <td>{{ cart.product.name }}<br>
+                        <small>{{ cart.product.subtitle }}</small>
+                    </td>
+                    <td>
+                        <a class="text-danger" href="{{ path('reduce_to_cart',{'id':cart.product.id}) }}"><i class="fas fa-minus-circle"></i></a>
+                        {{ cart.quantity }}
+                        <a class="text-success" href="{{ path('add_to_cart',{'id':cart.product.id}) }}"><i class="fas fa-plus-circle fa-lg"></i></a>
+                    </td>
+                    <td>{{ (cart.product.prix/100) | number_format(2, '.', ',') | format_currency('EUR')}}</td>
+                    <td>{{ ((cart.product.prix * cart.quantity)/100) | number_format(2, '.', ',') | format_currency('EUR')}}</td>
+                    <td><a href="{{ path('delete_one_item_from_cart', {'id': cart.product.id}) }}" class="text-danger"><i class="fas fa-trash"></i></a></td>
+                </tr>
+                {% set total= total +  (cart.product.prix * cart.quantity)%}
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-right">
+            <span>Nombre d'articles: {{ cartComplete|length }}</span>
+            <br>
+            <h5 class="my-5">Total du panier: {{ (total/100) | number_format(2, '.', ',') | format_currency('EUR')}} </h5>
+            <a href="#" class="btn btnPrimary"><i class="fas fa-check-circle"></i> Valider</a>
+        </div>
+    {% else %}
+        <p class="text-center mt-4">
+            <b>Votre panier est vide. Remplissez-le au plus vite!</b>
+            <br>
+            <a href="{{ path('product') }}" class="btn btnPrimary my-5">Revenir à la boutique</a>
+        </p>
+    {% endif %}
+{% endblock %}

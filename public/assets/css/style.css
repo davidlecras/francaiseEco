@@ -4,7 +4,7 @@
 
 .btnPrimary{
     background-color: #33473a;
-    color: #f1e9d2;
+    color: #d8af57;
 }
 
 .btnPrimary:hover{
@@ -12,9 +12,15 @@
     color: #33473a;
 }
 
-.navbar-light{
-    color: #33473a !important;
+.navbar-light a{
+    color: #3a5342 !important;
 }
+
+.navbar-light a:hover{
+    color: #d8af57 !important;
+}
+
+
 
 .product-items h5{
     text-transform: uppercase;

@@ -6,7 +6,7 @@
     <meta name="description" content="La mode Made in france féminine écologique">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>{% block title %}{% endblock %}</title>
+    <title>{% block title %}{% endblock %} | La française écolo</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{ asset('assets/css/bootstrap.min.css') }}" rel="stylesheet">
@@ -39,52 +39,50 @@
 </head>
 <body>
 <header>
-    <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light">
-        <a class="navbar-brand" href="{{ path('home') }}"><img src="{{ asset('logos/logo-site.png') }}" alt="logo" class="logo-main-site"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarCollapse">
-            <ul class="navbar-nav mr-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="{{path('product')}}">Nos vêtements MIF</a>
-                </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Mon espace personnel
-                    </a>
-                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                        {% if not app.user %}
-                            <li><a class="dropdown-item" href="{{ path('register')}}">Inscription</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ path('app_login')}}">Connexion</a></li>
-                        {% else %}
-                            <li><a class="dropdown-item" href="{{ path('account')}}">
-                                    J'accède à mon compte <br>
-                                    <small>Connecté en tant que {{ app.user.firstname |capitalize}} {{ app.user.lastname |upper}}</small>
-                                </a>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Mes commandes</a></li>
-                            <li><a class="dropdown-item" href="#">Mes adresses</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="{{ path('app_logout')}}">Déconnexion</a></li>
-                        {% endif %}
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-mail-bulk"></i> Nous contacter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Qui sommes-nous?</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i>Mon panier</a>
-                </li>
-            </ul>
-            <form class="form-inline mt-2 mt-md-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Recherche" aria-label="Search">
-                <button class="btn btnPrimary my-2 my-sm-0" type="submit">Ok</button>
-            </form>
+    <nav class="navbar navbar-expand-lg  fixed-top navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('home') }}">
+                <img src="{{ asset('logos/logo-site.png') }}" alt="logo" class="logo-main-site">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{path('product')}}">Nos vêtements MIF</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle dropdown-toggle-split" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Mon espace personnel
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            {% if not app.user %}
+                                <li><a class="dropdown-item" href="{{ path('register')}}">Inscription</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ path('app_login')}}">Connexion</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href="{{ path('account')}}">
+                                        J'accède à mon compte <br>
+                                        <small>Connecté en tant que {{ app.user.firstname |capitalize}} {{ app.user.lastname |upper}}</small>
+                                    </a>
+                                </li>
+                                <li><a class="dropdown-item" href="#">Mes commandes</a></li>
+                                <li><a class="dropdown-item" href="#">Mes adresses</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="{{ path('app_logout')}}">Déconnexion</a></li>
+                            {% endif %}
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#"><i class="fas fa-mail-bulk"></i> Nous contacter</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Qui sommes-nous?</a>
+                    </li>
+                </ul>
+                <a class="nav-link text-center" href="{{path('cart')}}"><i class="fas fa-shopping-cart"></i><br>Mon panier</a>
+            </div>
         </div>
     </nav>
 </header>
@@ -147,7 +145,6 @@
     <div class="container marketing {% if block ('carousel') is not defined %} mt-5 {% endif %}">
         <h1 class="text-center pt-3"> {% block titre %}{% endblock %}
         </h1>
-        {% block miette %}{% endblock %}
         {# messages flash après actions #}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
