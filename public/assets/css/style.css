@@ -12,6 +12,16 @@
     color: #33473a;
 }
 
+.btnSecondary{
+    background-color: #f1e9d2;
+    color: #33473a;
+}
+
+.btnSecondary:hover{
+    background-color: #33473a;
+    color: #f1e9d2;
+}
+
 .navbar-light a{
     color: #3a5342 !important;
 }

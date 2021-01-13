@@ -18,7 +18,20 @@
                 Votre mot de passe doit faire plus de 10 caractères et contenir au moins 1 majuscule 1 chiffre et 1 caractère non-alpha numérique.</p>
         </div>
         <div class="card-footer text-muted py-3">
-            <a href="{{path('account_password')}}" class="btn btnPrimary">Modifier mon mot de passe</a>
+            <a href="{{path('account_password')}}" class="btn btnPrimary"><i class="fas fa-unlock-alt"></i> Modifier mon mot de passe</a>
+        </div>
+    </div>
+
+    <div class="card text-center shadow mt-5">
+        <div class="card-header">
+            Gérer mes adresses
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Voir mes adresses</h5>
+            <p class="card-text">Pour pouvoir vous envoyer ...</p>
+        </div>
+        <div class="card-footer text-muted py-3">
+            <a href="{{ path('account_address') }}" class="btn btnPrimary"><i class="fas fa-address-book"></i> Mes adresses</a>
         </div>
     </div>
 {% endblock %}
