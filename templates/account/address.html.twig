@@ -6,9 +6,31 @@
     <p class="text-center"> Vous pouvez, dans cet espace gérer vos adresses.</p>
     <div class="row">
         <div class="col-6 text-center"><a href="{{ path('account') }}" class="btn btnSecondary"><i class="fas fa-house-user"></i> Revenir à mon compte</a></div>
-        <div class="col-6 text-center"><a href="#" class="btn btnPrimary"><i class="fas fa-plus"></i> Ajouter une adresse</a></div>
+        <div class="col-6 text-center"><a href="{{ path('account_address_add') }}" class="btn btnPrimary"><i class="fas fa-plus"></i> Ajouter une adresse</a></div>
     </div>
-
-
-
+    <hr>
+    {% if app.user.addresses | length ==0 %}
+        <p class="text-center mt-4 alert-danger">
+            <i class="fas fa-exclamation-triangle"></i> Vous n'avez pas encore d'adresses de livraison d'enregistré.
+        </p>
+    {% else %}
+        <div class="row">
+            {% for address in addresses %}
+                <div class="col-md-4">
+                    <div class="card text-center shadow" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ address.name | upper }}</h5>
+                        {% if address.compagny %}
+                            <h6 class="card-subtitle mb-2 text-muted"> Société: {{ address.compagny |upper }}</h6>
+                        {% endif %}
+                        <h6 class="card-subtitle mb-2"> Destinataire: {{ address.firstname | capitalize }} {{ address.lastname |capitalize }}</h6>
+                        <p class="card-text">{{ address.address |title}}, {{ address.postcode }} {{ address.city|title}}, {{ address.country |country_name('fr') }}</p>
+                        <a href="{{ path('account_address_edit', {'id': address.id}) }}" class="card-link btn btnPrimary"><i class="fas fa-pen"></i> Modifier</a>
+                        <a href="{{ path('account_address_remove',{'id': address.id}) }}" class="card-link btn btn-danger"><i class="fas fa-trash"></i> Supprimer</a>
+                    </div>
+                </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
 {% endblock %}

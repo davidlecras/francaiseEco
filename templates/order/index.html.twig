@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Valider ma commande{% endblock %}
+
+{% block titre %}Je passe commande{% endblock %}
+{% block body %}
+    <p class="text-center">Choisissez vos préférences avant de passer votre commande sur la française écolo-mode</p>
+    <hr>
+    <div class="row">
+        <div class="col-md-6 text-center">
+            <h5 class="text-center">Détails de livraison:</h5>
+            <a href="{{ path('account_address_add') }}" class="btn btn-block btnSecondary"><i class="fas fa-plus"></i> Ajouter une adresse</a>
+            {% set formHtml %}
+                {{ form_start(form, {action:path('order_recap')})}}
+                {{ form_end(form)}}
+            {% endset %}
+            {{ formHtml | replace({'[br]' : '</br>'}) | raw }}
+        </div>
+        <div class="col-md-6 mx-auto">
+            <h5 class="text-center">Récapitulatif de la commande:</h5>
+            <div class="order-summary">
+                {% for key,cart in cart %}
+                    <div class="row {% if key>0 %} mt-2 {% endif %}">
+                        <div class="col-2"><img src="uploads/{{ cart.product.image}}" height="75px"></div>
+                        <div class="col-6  text-center my-auto">
+                            {{ cart.product.name }}
+                            <br>
+                            <small>{{ cart.product.subtitle }}</small>
+                        </div>
+                        <div class="col-2 my-auto text-center">
+                            Prix
+                            <br>
+                            {{ (cart.product.prix/100) | number_format(2, '.', ',') | format_currency('EUR')}}
+                        </div>
+                        <div class="col-2 my-auto text-center">
+                            Quantité
+                            <br>
+                            {{ cart.quantity }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

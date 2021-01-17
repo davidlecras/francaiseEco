@@ -29,7 +29,7 @@
             {% for cart in cartComplete %}
                 <tr>
                     <th scope="row">
-                        <img src="uploads/{{ cart.product.image}}" height="50px">
+                        <img src="uploads/{{ cart.product.image}}" height="75px">
                     </th>
                     <td>{{ cart.product.name }}<br>
                         <small>{{ cart.product.subtitle }}</small>
@@ -51,7 +51,7 @@
             <span>Nombre d'articles: {{ cartComplete|length }}</span>
             <br>
             <h5 class="my-5">Total du panier: {{ (total/100) | number_format(2, '.', ',') | format_currency('EUR')}} </h5>
-            <a href="#" class="btn btnPrimary"><i class="fas fa-check-circle"></i> Valider</a>
+            <a href="{{ path('order') }}" class="btn btnPrimary"><i class="fas fa-check-circle"></i> Valider</a>
         </div>
     {% else %}
         <p class="text-center mt-4">
