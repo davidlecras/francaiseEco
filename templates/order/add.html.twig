@@ -51,7 +51,7 @@
                 {% set grand_total = (((total/100) | number_format(2, '.', ','))+ carrier.price)| format_currency('EUR') %}
                 <b>Total: {{ grand_total }}</b>
             </div>
-            <a href="#" id="checkout-button" class="btn btn-block btnPrimary mt-5 font-weight-bold"><i class="fas fa-credit-card"></i> Payer {{ grand_total }}</a>
+            <a id="checkout-button" class="btn btn-block btnPrimary mt-5 font-weight-bold"><i class="fas fa-credit-card"></i> Payer {{ grand_total }}</a>
         </div>
     </div>
 {% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Merci!{% endblock %}
+
+{% block titre %}Confirmation de votre commande{% endblock %}
+{% block body %}
+    <div class="text-center">
+        <i class="fas fa-smile-beam fa-10x" id="smiley-purchased"></i>
+        <p class="my-4">
+            {{ order.user.firstname | capitalize}} {{ order.user.lastname| upper }}, La Française Écolo-mode vous remercie de votre achat.
+            <br>
+            Une confirmation de votre commande n°{{ order.reference }} vient de vous être envoyé par e-mail.
+        </p>
+        <hr>
+        <p>
+            Vos détails de livraison ont été transmis à {{ order.carrierName }}.
+            <br>
+            Vous recevrez un e-mail pour le suivi de la livraison dès que votre commande sera préparée.
+        </p>
+    </div>
+    {{ dump(order) }}
+{% endblock %}
