@@ -8,12 +8,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class OrderValidateController extends AbstractController
+class OrderFailedController extends AbstractController
 {
     private $entityManager;
 
     /**
-     * OrderValidateController constructor.
+     * OrderFailedController constructor.
      * @param $entityManager
      */
     public function __construct(EntityManagerInterface $entityManager)
@@ -21,8 +21,9 @@ class OrderValidateController extends AbstractController
         $this->entityManager = $entityManager;
     }
 
+
     /**
-     * @Route("/commande/merci/{stripeSessionId}", name="order_validate")
+     * @Route("/commande/erreur/{stripeSessionId}", name="order_failed")
      */
     public function index($stripeSessionId): Response
     {
@@ -31,13 +32,10 @@ class OrderValidateController extends AbstractController
             return $this->redirectToRoute('home');
         }
 
-        //Modification du status isPaid
-        if(!$order->getIsPaid()){
-            $order->setIsPaid(1);
-        }
+        //envoie d'email pour dire paiement refusé!
 
-        return $this->render('order_validate/index.html.twig',[
-            'order'=>$order,
+        return $this->render('order_failed/index.html.twig',[
+            'order'=>$order
         ]);
     }
 }

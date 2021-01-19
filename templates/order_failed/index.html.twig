@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur de paiement!{% endblock %}
+
+{% block titre %}Erreur de paiement{% endblock %}
+{% block body %}
+    <div class="text-center">
+        <i class="fas fa-exclamation-circle fa-10x text-danger"></i>
+        <p class="my-4">
+            Bonjour {{ order.user.firstname | capitalize}} {{ order.user.lastname| upper }}.
+            <br>
+            Oups! Il semble que le paiement n'a pas été validé pour la commande n°{{ order.reference }}.
+            <br>
+            Un e-mail vient de vous être envoyé sur <strong>{{ order.user.email | lower }}</strong>.
+        </p>
+        <hr>
+        <a href="{{ path('order') }}" class="btn btnSecondary">Réessayer à nouveau</a>
+    </div>
+{% endblock %}

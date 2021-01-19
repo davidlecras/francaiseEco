@@ -27,11 +27,15 @@
             Gérer mes adresses
         </div>
         <div class="card-body">
-            <h5 class="card-title">Voir mes adresses</h5>
-            <p class="card-text">Pour pouvoir vous envoyer ...</p>
+            <h5 class="card-title">Mes adresses</h5>
+            <p class="card-text">
+                Vous pouvez dans cette rubrique modifier, ajouter ou supprimer vos adresses de livraison.
+                <br>
+                <i class="fas fa-exclamation-triangle fa-lg text-danger"></i> Attention! Veuillez vérifier que vos informations soient valides lors de vos achats.
+            </p>
         </div>
         <div class="card-footer text-muted py-3">
-            <a href="{{ path('account_address') }}" class="btn btnPrimary"><i class="fas fa-address-book"></i> Mes adresses</a>
+            <a href="{{ path('account_address') }}" class="btn btnPrimary"><i class="fas fa-address-book"></i> Mes adresses ({{ app.user.addresses|length }})</a>
         </div>
     </div>
 {% endblock %}

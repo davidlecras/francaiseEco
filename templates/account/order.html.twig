@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes commandes{% endblock %}
+{% block titre %}Mes commandes{% endblock %}
+{% block body %}
+    {{ dump(orders) }}
+    <div class="row">
+        {% for order in orders %}
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Commande: {{ order.reference }}</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.{{ order.orderDetails.product }}
+                        <hr>
+                        {% if order.isPaid %}
+                            Status: payée.
+                        {% else %}
+                            Status: non payée.
+                        {% endif %}
+                    </p>
+                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+{% endblock %}

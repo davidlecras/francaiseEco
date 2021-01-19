@@ -15,8 +15,14 @@
         <p>
             Vos détails de livraison ont été transmis à {{ order.carrierName }}.
             <br>
+            Elle sera livrée à l'adresse suivante:
+            <br>
+            {{ order.delivery |raw }}
+        <hr class="my-3">
             Vous recevrez un e-mail pour le suivi de la livraison dès que votre commande sera préparée.
+            <br>
+            Ou vous pouvez la suivre directement depuis <a href="#">votre espace personnel</a>
         </p>
+
     </div>
-    {{ dump(order) }}
 {% endblock %}

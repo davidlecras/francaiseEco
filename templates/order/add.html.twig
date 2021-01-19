@@ -46,9 +46,9 @@
             <hr>
             <div class="text-center">
                 <b>Sous-total: {{ (total/100) | number_format(2, '.', ',') | format_currency('EUR')}} </b> <br>
-                <b>Livraison: {{ carrier.price | format_currency('EUR')}}</b>
+                <b>Livraison: {{ (carrier.price/100) | format_currency('EUR')}}</b>
                 <hr>
-                {% set grand_total = (((total/100) | number_format(2, '.', ','))+ carrier.price)| format_currency('EUR') %}
+                {% set grand_total = (((total/100) | number_format(2, '.', ','))+ (carrier.price/100))| format_currency('EUR') %}
                 <b>Total: {{ grand_total }}</b>
             </div>
             <a id="checkout-button" class="btn btn-block btnPrimary mt-5 font-weight-bold"><i class="fas fa-credit-card"></i> Payer {{ grand_total }}</a>
