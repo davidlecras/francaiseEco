@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Commande {{ order.reference }}{% endblock %}
+{% block titre %}Ma commande n°{{ order.reference |upper }}{% endblock %}
+{% block body %}
+    <section class="mt-4">
+        <p>
+            <strong>Passée le</strong> {{ order.createdAt|format_datetime('full', 'none', locale='fr')  }}
+            <br>
+            <strong>Référence de ma commande:</strong> <small>{{ order.reference }}</small>
+            <br>
+            <strong>Transporteur:</strong> {{ order.carrierName }}
+        </p>
+        <h5>Détail de ma commande:</h5>
+        <table class="table mt-4">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Qté.</th>
+                <th scope="col">Prix Unit.</th>
+                <th scope="col">Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for products in order.orderDetails %}
+                <tr>
+                    <td>{{ products.product }}</td>
+                    <td>{{ products.quantity }}</td>
+                    <td>{{ (products.price/100) | number_format(2, '.', ',') | format_currency('EUR')}}</td>
+                    <td>{{(products.total/100) | number_format(2, '.', ',') | format_currency('EUR')}}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="text-right">
+            <strong>Sous-total:</strong> {{ (order.getTotal/100) | number_format(2, '.', ',') | format_currency('EUR')}}<br>
+            <strong>Frais de port:</strong>{{ (order.carrierPrice/100) | number_format(2, '.', ',') | format_currency('EUR')}}<br>
+            <strong>Total:</strong>{{ ((order.carrierPrice+order.getTotal)/100) | number_format(2, '.', ',') | format_currency('EUR')}}
+        </div>
+    </section>
+
+{% endblock %}
