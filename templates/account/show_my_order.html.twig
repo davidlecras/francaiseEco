@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'account/index.html.twig' %}
 
 {% block title %}Commande {{ order.reference }}{% endblock %}
 {% block titre %}Ma commande n°{{ order.reference |upper }}{% endblock %}
@@ -33,10 +33,9 @@
             </tbody>
         </table>
         <div class="text-right">
-            <strong>Sous-total:</strong> {{ (order.getTotal/100) | number_format(2, '.', ',') | format_currency('EUR')}}<br>
-            <strong>Frais de port:</strong>{{ (order.carrierPrice/100) | number_format(2, '.', ',') | format_currency('EUR')}}<br>
-            <strong>Total:</strong>{{ ((order.carrierPrice+order.getTotal)/100) | number_format(2, '.', ',') | format_currency('EUR')}}
+            <strong>Sous-total: </strong>{{ (order.getTotal/100) | number_format(2, '.', ',') | format_currency('EUR')}}<br>
+            <strong>Frais de port: </strong>{{ (order.carrierPrice/100) | number_format(2, '.', ',') | format_currency('EUR')}}<br>
+            <strong>Total: </strong>{{ ((order.carrierPrice+order.getTotal)/100) | number_format(2, '.', ',') | format_currency('EUR')}}
         </div>
     </section>
-
 {% endblock %}

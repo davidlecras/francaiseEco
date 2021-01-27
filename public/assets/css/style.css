@@ -60,6 +60,10 @@
     padding: 20px;
 }
 
+.carousel-text{
+    color: #33473a !important;
+}
+
 #smiley-purchased{
     color: #33473a;
 }

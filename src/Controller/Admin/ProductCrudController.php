@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Product;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\CollectionField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
@@ -23,17 +24,18 @@ class ProductCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            TextField::new('name'),
+            TextField::new('name','Nom'),
             SlugField::new('slug')->setTargetFieldName('name'),
-            TextField::new('subtitle'),
+            TextField::new('subtitle','Sous-titre'),
             ImageField::new('image')
                 ->setBasePath('uploads/')
                 ->setUploadDir('public/uploads/')
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
             TextEditorField::new('description'),
+            BooleanField::new('isBest', 'En avant'),
             MoneyField::new('prix')->setCurrency('EUR'),
-            AssociationField::new('category')
+            AssociationField::new('category', 'Catégorie')
 
         ];
     }

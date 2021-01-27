@@ -29,9 +29,7 @@ class AccountAddressController extends AbstractController
      */
     public function index(): Response
     {
-        $addresses= $this->entityManager->getRepository(Address::class)->findAll();
         return $this->render('account/address.html.twig',[
-            'addresses'=>$addresses
         ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Classes\Mailjet;
 use App\Entity\User;
 use App\Form\RegisterType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -29,12 +30,22 @@ class RegisterController extends AbstractController
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $user= $form->getData();
-            $password= $userPasswordEncoder->encodePassword($user,$user->getPassword());
-            $user->setPassword($password);
-            $this->entityManager->persist($user);
-            $this->entityManager->flush();
-            $this->addFlash('success','Bienvenue parmis nous');
-            return $this->redirectToRoute('home');
+            $search_email= $this->entityManager->getRepository(User::class)->findOneByEmail($user->getEmail());
+            if(!$search_email){
+                $password= $userPasswordEncoder->encodePassword($user,$user->getPassword());
+                $user->setPassword($password);
+                $this->entityManager->persist($user);
+                $this->entityManager->flush();
+
+                $email= new Mailjet();
+                $content="Bienvenue ".$user->getFirstname()."<br> Vous êtes bien inscrit chez nous ............... ";
+                $email->send($user->getEmail(),$user->getFirstname(), 'Bienvenue sur La Française Écolo-mode',$content);
+
+                $this->addFlash('success','Bienvenue parmi nous');
+                return $this->redirectToRoute('home');
+            }else{
+                $this->addFlash('danger',"Cet utilisateur existe déjà!");
+            }
 
         }
         return $this->render('register/index.html.twig',[
