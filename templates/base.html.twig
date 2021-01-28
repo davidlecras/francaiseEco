@@ -80,6 +80,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="#">Qui sommes-nous?</a>
                     </li>
+                    {% if is_granted('ROLE_ADMIN')%}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('admin') }}"><i class="fas fa-tools"></i> Espace Administrateur</a>
+                        </li>
+                    {% endif %}
                 </ul>
                 <a class="nav-link text-center" href="{{path('cart')}}"><i class="fas fa-shopping-cart"></i><br>Mon panier</a>
             </div>
@@ -102,7 +107,7 @@
                     <div class="carousel-caption text-left">
                         <h1>{{ carousel.title }}</h1>
                         <p>{{ carousel.content |raw}}</p>
-                        <p><a class="btn btnPrimary" href="{{ carousel.BtnUrl }}" role="button">{{ carousel.btnTitle }}</a></p>
+                        <p><a class="btn btnPrimary {% if carousel.linkIsInactive == 1 %}disabled{% endif %}" href="{{ carousel.BtnUrl }}" role="button">{{ carousel.btnTitle }}</a></p>
                     </div>
                 </div>
             </div>
@@ -124,7 +129,7 @@
     <!-- Wrap the rest of the page in another container to center all the content. -->
 
     <div class="container marketing {% if block ('carousel') is not defined %} mt-5 {% endif %}">
-        <h1 class="text-center pt-3"> {% block titre %}{% endblock %}
+        <h1 class="text-center pt-3 h3 font-weight-normal"> {% block titre %}{% endblock %}
         </h1>
         {# messages flash après actions #}
         {% for label, messages in app.flashes %}

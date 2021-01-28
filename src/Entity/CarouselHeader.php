@@ -42,6 +42,11 @@ class CarouselHeader
      */
     private $image;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $linkIsInactive;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -103,6 +108,18 @@ class CarouselHeader
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getLinkIsInactive(): ?bool
+    {
+        return $this->linkIsInactive;
+    }
+
+    public function setLinkIsInactive(bool $linkIsInactive): self
+    {
+        $this->linkIsInactive = $linkIsInactive;
 
         return $this;
     }

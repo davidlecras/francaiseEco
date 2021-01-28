@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur!{% endblock %}
+{% block titre%}Page introuvable!{% endblock %}
+{% block body %}
+    <div class="block-small text-center">
+        <p>
+            La page demandée n'a pu être localisée.
+        </p>
+        <a  class="btn btnSecondary btn-block" href="{{ path('home') }}"><i class="fas fa-home fa-3x"></i> Revenir à l'accueil</a>.
+    </div>
+{% endblock %}

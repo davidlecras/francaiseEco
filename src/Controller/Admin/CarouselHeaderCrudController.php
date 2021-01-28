@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\CarouselHeader;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
@@ -27,7 +28,8 @@ class CarouselHeaderCrudController extends AbstractCrudController
                 ->setUploadedFileNamePattern('[randomhash].[extension]')
                 ->setRequired(false),
             TextField::new('btnTitle', 'Titre du bouton'),
-            TextField::new('btnUrl','Url à rediriger')
+            TextField::new('btnUrl','Url à rediriger'),
+            BooleanField::new('linkIsInactive','Désactiver le bouton')
 
         ];
     }
