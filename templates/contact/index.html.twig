@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact{% endblock %}
+
+{% block titre %}Contactez-nous!{% endblock %}
+{% block body %}
+    <div class="row">
+        <div class="col-md-8">
+            {{ form(form) }}
+        </div>
+        <div class="col-md-4 text-center">
+            <strong>La Française Écolo-mode</strong>
+            <hr>
+            <p>
+                Vous pouvez nous contacter par téléphone:<br>
+                <a href="tel:+330101010101">01.01.01.01.01</a><br>
+                Ou par courier:<br>
+                Place de l'Hôtel de Ville, 75004 Paris
+            </p>
+        </div>
+    </div>
+{% endblock %}
