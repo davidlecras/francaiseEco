@@ -47,11 +47,6 @@ class Order
     private $delivery;
 
     /**
-     * @ORM\OneToMany(targetEntity=OrderDetails::class, mappedBy="myOrder")
-     */
-    private $orderDetails;
-
-    /**
      * @ORM\Column(type="boolean")
      */
     private $isPaid;
@@ -66,20 +61,6 @@ class Order
      */
     private $stripeSessionId;
 
-    public function __construct()
-    {
-        $this->orderDetails = new ArrayCollection();
-    }
-    public function getTotal():string
-    {
-        $total= null;
-
-        foreach ($this->getOrderDetails()->getValues() as $product)
-        {
-            $total += $product->getPrice() * $product->getQuantity();
-        }
-        return $total;
-    }
     public function getId(): ?int
     {
         return $this->id;
@@ -141,36 +122,6 @@ class Order
     public function setDelivery(string $delivery): self
     {
         $this->delivery = $delivery;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|OrderDetails[]
-     */
-    public function getOrderDetails(): Collection
-    {
-        return $this->orderDetails;
-    }
-
-    public function addOrderDetail(OrderDetails $orderDetail): self
-    {
-        if (!$this->orderDetails->contains($orderDetail)) {
-            $this->orderDetails[] = $orderDetail;
-            $orderDetail->setMyOrder($this);
-        }
-
-        return $this;
-    }
-
-    public function removeOrderDetail(OrderDetails $orderDetail): self
-    {
-        if ($this->orderDetails->removeElement($orderDetail)) {
-            // set the owning side to null (unless already changed)
-            if ($orderDetail->getMyOrder() === $this) {
-                $orderDetail->setMyOrder(null);
-            }
-        }
 
         return $this;
     }
